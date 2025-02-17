@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Users, Rocket, Target } from "lucide-react";
+import { Users, Rocket, Target, Linkedin, Github, Twitter, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
@@ -13,24 +13,48 @@ const Team = () => {
       role: "Core Team",
       description: "Passionate about blockchain technology and Web3 innovation",
       image: "https://api.dicebear.com/7.x/avatars/svg?seed=vinay",
+      socials: {
+        linkedin: "https://linkedin.com",
+        github: "https://github.com",
+        twitter: "https://twitter.com",
+        email: "mailto:vinay@tokenflow.com"
+      }
     },
     {
       name: "Leo Rex",
       role: "Core Team",
       description: "Expert in DeFi protocols and smart contract development",
       image: "https://api.dicebear.com/7.x/avatars/svg?seed=leo",
+      socials: {
+        linkedin: "https://linkedin.com",
+        github: "https://github.com",
+        twitter: "https://twitter.com",
+        email: "mailto:leo@tokenflow.com"
+      }
     },
     {
       name: "Usaid",
       role: "Core Team",
       description: "Focused on creating seamless user experiences in the Web3 space",
       image: "https://api.dicebear.com/7.x/avatars/svg?seed=usaid",
+      socials: {
+        linkedin: "https://linkedin.com",
+        github: "https://github.com",
+        twitter: "https://twitter.com",
+        email: "mailto:usaid@tokenflow.com"
+      }
     },
     {
       name: "Alphazero",
       role: "Core Team",
       description: "Blockchain enthusiast with a passion for decentralized technologies",
       image: "https://api.dicebear.com/7.x/avatars/svg?seed=alpha",
+      socials: {
+        linkedin: "https://linkedin.com",
+        github: "https://github.com",
+        twitter: "https://twitter.com",
+        email: "mailto:alpha@tokenflow.com"
+      }
     },
   ];
 
@@ -89,11 +113,7 @@ const Team = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ 
-                scale: 1.05,
-                rotateY: 10,
-                translateZ: 20,
-              }}
+              whileHover={{ scale: 1.02 }}
               className="relative group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity" />
@@ -101,7 +121,7 @@ const Team = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="relative z-10">
                   <div className="relative w-32 h-32 mx-auto mb-6">
-                    <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-full animate-spin-slow opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                     <img
                       src={member.image}
                       alt={member.name}
@@ -110,7 +130,41 @@ const Team = () => {
                   </div>
                   <h3 className="text-2xl font-bold mb-2">{member.name}</h3>
                   <p className="text-neon-blue font-semibold mb-3">{member.role}</p>
-                  <p className="text-gray-300">{member.description}</p>
+                  <p className="text-gray-300 mb-6">{member.description}</p>
+                  
+                  {/* Social Media Links */}
+                  <div className="flex justify-center space-x-4">
+                    <a 
+                      href={member.socials.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors group"
+                    >
+                      <Linkedin className="w-5 h-5 text-[#0A66C2] group-hover:scale-110 transition-transform" />
+                    </a>
+                    <a 
+                      href={member.socials.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors group"
+                    >
+                      <Github className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
+                    </a>
+                    <a 
+                      href={member.socials.twitter}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors group"
+                    >
+                      <Twitter className="w-5 h-5 text-[#1DA1F2] group-hover:scale-110 transition-transform" />
+                    </a>
+                    <a 
+                      href={member.socials.email}
+                      className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors group"
+                    >
+                      <Mail className="w-5 h-5 text-[#EA4335] group-hover:scale-110 transition-transform" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </motion.div>
