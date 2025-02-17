@@ -350,7 +350,7 @@ const Index = () => {
             >
               <span className="relative z-10">Get Started</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform relative z-10" />
-              <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-r from-neon-blue to-neon-pink opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.button>
           </motion.div>
         </div>
@@ -389,9 +389,9 @@ const Index = () => {
                   whileHover={{ scale: 1.02 }}
                   className="relative group"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-xl opacity-0 group-hover:opacity-20 transition-all duration-300" />
-                  <div className="glass-card p-8 relative overflow-hidden border-0">
-                    <div className="absolute inset-0 bg-white/5 backdrop-blur-xl" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/20 via-neon-purple/20 to-neon-pink/20 rounded-xl opacity-50 group-hover:opacity-20 transition-all duration-300" />
+                  <div className="glass-card p-8 relative overflow-hidden border-0 shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-xl bg-white/10">
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.08] to-transparent" />
                     <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
                     <div className="relative z-10">
                       <h3 className="text-2xl font-semibold mb-4 group-hover:text-neon-blue transition-colors">{solution.title}</h3>
@@ -418,12 +418,12 @@ const Index = () => {
                   whileHover={{ scale: 1.02 }}
                   className="relative group"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-xl opacity-0 group-hover:opacity-20 transition-all duration-300" />
-                  <div className="glass-card p-8 text-center relative overflow-hidden border-0">
-                    <div className="absolute inset-0 bg-white/5 backdrop-blur-xl" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/20 via-neon-purple/20 to-neon-pink/20 rounded-xl opacity-50 group-hover:opacity-20 transition-all duration-300" />
+                  <div className="glass-card p-8 text-center relative overflow-hidden border-0 shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-xl bg-white/10">
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.08] to-transparent" />
                     <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
                     <div className="relative z-10">
-                      <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                      <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors shadow-lg">
                         <feature.icon className="w-8 h-8 text-neon-blue transform group-hover:scale-110 transition-transform" />
                       </div>
                       <h3 className="text-xl font-semibold mb-4 group-hover:text-neon-blue transition-colors">{feature.title}</h3>
