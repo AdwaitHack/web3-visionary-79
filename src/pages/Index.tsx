@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const [showContactForm, setShowContactForm] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
   const contactFormRef = useRef<HTMLDivElement>(null);
@@ -255,7 +257,12 @@ const Index = () => {
               >
                 About
               </button>
-              <a href="#team" className="hover:text-neon-blue transition-colors">Team</a>
+              <button 
+                onClick={() => navigate('/team')} 
+                className="hover:text-neon-blue transition-colors"
+              >
+                Team
+              </button>
               <button 
                 onClick={() => {
                   setShowContactForm(true);
@@ -287,7 +294,13 @@ const Index = () => {
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
               Empowering blockchain projects with data-driven growth strategies, community building, and comprehensive market penetration.
             </p>
-            <button className="bg-primary hover:bg-primary-light transition-colors px-8 py-4 rounded-full text-white font-semibold flex items-center mx-auto space-x-2 group">
+            <button 
+              onClick={() => {
+                setShowContactForm(true);
+                scrollToRef(contactFormRef);
+              }}
+              className="bg-primary hover:bg-primary-light transition-colors px-8 py-4 rounded-full text-white font-semibold flex items-center mx-auto space-x-2 group"
+            >
               <span>Get Started</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
@@ -404,54 +417,6 @@ const Index = () => {
                 <step.icon className="w-10 h-10 mb-4 text-neon-blue" />
                 <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
                 <p className="text-gray-400">{step.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="team" className="py-20">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 gradient-text">Meet Our Team</h2>
-          <div className="grid md:grid-cols-4 gap-8">
-            {team.map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="glass-card p-6 text-center"
-              >
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-24 h-24 rounded-full mx-auto mb-4"
-                />
-                <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
-                <p className="text-neon-blue mb-2">{member.role}</p>
-                <p className="text-gray-400 text-sm">{member.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-black/10">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 gradient-text">Our Values</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {values.map((value, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
-                className="glass-card p-6 text-center"
-              >
-                <value.icon className="w-10 h-10 mx-auto mb-4 text-neon-blue" />
-                <h3 className="text-xl font-semibold mb-2">{value.title}</h3>
-                <p className="text-gray-400">{value.description}</p>
               </motion.div>
             ))}
           </div>
