@@ -242,58 +242,58 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      <div className="absolute inset-0 -z-20 overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute min-w-full min-h-full object-cover"
-          style={{ filter: 'brightness(0.4)' }}
-        >
-          <source src="https://assets.production.linktr.ee/profile--collab-theme-assets/backgroundVideoDesktop.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div className="absolute inset-0 -z-10 bg-black/40" />
-      
-      <nav className="fixed top-0 w-full z-50 glass-effect">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="text-xl font-bold gradient-text">TokenFlow</div>
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#solutions" className="hover:text-neon-blue transition-colors">Solutions</a>
-              <button 
-                onClick={() => scrollToRef(aboutRef)} 
-                className="hover:text-neon-blue transition-colors"
-              >
-                About
-              </button>
-              <button 
-                onClick={() => navigate('/team')} 
-                className="hover:text-neon-blue transition-colors"
-              >
-                Team
-              </button>
-              <button 
-                onClick={() => {
-                  setShowContactForm(true);
-                  setTimeout(() => scrollToRef(contactFormRef), 100);
-                }} 
-                className="hover:text-neon-blue transition-colors"
-              >
-                Contact
+    <div className="min-h-screen relative">
+      <section className="min-h-screen relative overflow-hidden">
+        <div className="absolute inset-0 -z-20 overflow-hidden">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute min-w-full min-h-full object-cover"
+            style={{ filter: 'brightness(0.4)' }}
+          >
+            <source src="https://assets.production.linktr.ee/profile--collab-theme-assets/backgroundVideoDesktop.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div className="absolute inset-0 -z-10 bg-black/40" />
+        
+        <nav className="fixed top-0 w-full z-50 glass-effect">
+          <div className="container mx-auto px-6 py-4">
+            <div className="flex items-center justify-between">
+              <div className="text-xl font-bold gradient-text">TokenFlow</div>
+              <div className="hidden md:flex items-center space-x-8">
+                <a href="#solutions" className="hover:text-neon-blue transition-colors">Solutions</a>
+                <button 
+                  onClick={() => scrollToRef(aboutRef)} 
+                  className="hover:text-neon-blue transition-colors"
+                >
+                  About
+                </button>
+                <button 
+                  onClick={() => navigate('/team')} 
+                  className="hover:text-neon-blue transition-colors"
+                >
+                  Team
+                </button>
+                <button 
+                  onClick={() => {
+                    setShowContactForm(true);
+                    setTimeout(() => scrollToRef(contactFormRef), 100);
+                  }} 
+                  className="hover:text-neon-blue transition-colors"
+                >
+                  Contact
+                </button>
+              </div>
+              <button className="md:hidden text-white p-2">
+                <MessageSquare className="w-6 h-6" />
               </button>
             </div>
-            <button className="md:hidden text-white p-2">
-              <MessageSquare className="w-6 h-6" />
-            </button>
           </div>
-        </div>
-      </nav>
+        </nav>
 
-      <section className="min-h-screen flex items-center justify-center hero-gradient">
-        <div className="container mx-auto px-6 pt-32">
+        <div className="container mx-auto px-6 h-screen flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -320,270 +320,272 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-black/20">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {metrics.map((metric, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
-              >
-                <h3 className="text-4xl md:text-5xl font-bold mb-2 gradient-text">{metric.value}</h3>
-                <p className="text-gray-400">{metric.label}</p>
-              </motion.div>
-            ))}
+      <div className="bg-background">
+        <section className="py-20 bg-black/20">
+          <div className="container mx-auto px-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {metrics.map((metric, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="text-center"
+                >
+                  <h3 className="text-4xl md:text-5xl font-bold mb-2 gradient-text">{metric.value}</h3>
+                  <p className="text-gray-400">{metric.label}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="solutions" className="py-20">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 gradient-text">Core Solutions</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {solutions.map((solution, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.02 }}
-                className="relative group"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-xl opacity-0 group-hover:opacity-20 transition-all duration-300" />
-                <div className="glass-card p-8 relative overflow-hidden border-0">
-                  <div className="absolute inset-0 bg-white/5 backdrop-blur-xl" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                  <div className="relative z-10">
-                    <h3 className="text-2xl font-semibold mb-4 group-hover:text-neon-blue transition-colors">{solution.title}</h3>
-                    <p className="text-gray-400 mb-6">{solution.description}</p>
-                    <ChevronRight className="w-6 h-6 text-neon-blue transform group-hover:translate-x-2 transition-transform" />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-black/10">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 gradient-text">What Sets Us Apart</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.02 }}
-                className="relative group"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-xl opacity-0 group-hover:opacity-20 transition-all duration-300" />
-                <div className="glass-card p-8 text-center relative overflow-hidden border-0">
-                  <div className="absolute inset-0 bg-white/5 backdrop-blur-xl" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                  <div className="relative z-10">
-                    <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-                      <feature.icon className="w-8 h-8 text-neon-blue transform group-hover:scale-110 transition-transform" />
+        <section id="solutions" className="py-20">
+          <div className="container mx-auto px-6">
+            <h2 className="text-4xl font-bold text-center mb-16 gradient-text">Core Solutions</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              {solutions.map((solution, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ scale: 1.02 }}
+                  className="relative group"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-xl opacity-0 group-hover:opacity-20 transition-all duration-300" />
+                  <div className="glass-card p-8 relative overflow-hidden border-0">
+                    <div className="absolute inset-0 bg-white/5 backdrop-blur-xl" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                    <div className="relative z-10">
+                      <h3 className="text-2xl font-semibold mb-4 group-hover:text-neon-blue transition-colors">{solution.title}</h3>
+                      <p className="text-gray-400 mb-6">{solution.description}</p>
+                      <ChevronRight className="w-6 h-6 text-neon-blue transform group-hover:translate-x-2 transition-transform" />
                     </div>
-                    <h3 className="text-xl font-semibold mb-4 group-hover:text-neon-blue transition-colors">{feature.title}</h3>
-                    <p className="text-gray-400">{feature.description}</p>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="py-20">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 gradient-text">Client Success Stories</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.02 }}
-                className="relative group"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-xl opacity-0 group-hover:opacity-20 transition-all duration-300" />
-                <div className="glass-card p-8 relative overflow-hidden border-0">
-                  <div className="absolute inset-0 bg-white/5 backdrop-blur-xl" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                  <div className="relative z-10">
-                    <Star className="absolute top-4 right-4 text-neon-blue w-6 h-6" />
-                    <div className="flex items-center mb-6">
-                      <div className="relative w-16 h-16 mr-4">
-                        <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                        <img
-                          src={testimonial.image}
-                          alt={testimonial.author}
-                          className="w-full h-full rounded-full object-cover relative z-10 p-0.5"
-                        />
+        <section className="py-20 bg-black/10">
+          <div className="container mx-auto px-6">
+            <h2 className="text-4xl font-bold text-center mb-16 gradient-text">What Sets Us Apart</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {features.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ scale: 1.02 }}
+                  className="relative group"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-xl opacity-0 group-hover:opacity-20 transition-all duration-300" />
+                  <div className="glass-card p-8 text-center relative overflow-hidden border-0">
+                    <div className="absolute inset-0 bg-white/5 backdrop-blur-xl" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                    <div className="relative z-10">
+                      <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                        <feature.icon className="w-8 h-8 text-neon-blue transform group-hover:scale-110 transition-transform" />
                       </div>
-                      <div>
-                        <p className="font-semibold text-lg group-hover:text-neon-blue transition-colors">{testimonial.author}</p>
-                        <p className="text-gray-400">{testimonial.role}</p>
-                      </div>
+                      <h3 className="text-xl font-semibold mb-4 group-hover:text-neon-blue transition-colors">{feature.title}</h3>
+                      <p className="text-gray-400">{feature.description}</p>
                     </div>
-                    <p className="text-lg text-gray-300 italic">{testimonial.quote}</p>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="py-20 bg-black/10">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 gradient-text">Our Process</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {process.map((step, index) => (
+        <section className="py-20">
+          <div className="container mx-auto px-6">
+            <h2 className="text-4xl font-bold text-center mb-16 gradient-text">Client Success Stories</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ scale: 1.02 }}
+                  className="relative group"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-xl opacity-0 group-hover:opacity-20 transition-all duration-300" />
+                  <div className="glass-card p-8 relative overflow-hidden border-0">
+                    <div className="absolute inset-0 bg-white/5 backdrop-blur-xl" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                    <div className="relative z-10">
+                      <Star className="absolute top-4 right-4 text-neon-blue w-6 h-6" />
+                      <div className="flex items-center mb-6">
+                        <div className="relative w-16 h-16 mr-4">
+                          <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                          <img
+                            src={testimonial.image}
+                            alt={testimonial.author}
+                            className="w-full h-full rounded-full object-cover relative z-10 p-0.5"
+                          />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-lg group-hover:text-neon-blue transition-colors">{testimonial.author}</p>
+                          <p className="text-gray-400">{testimonial.role}</p>
+                        </div>
+                      </div>
+                      <p className="text-lg text-gray-300 italic">{testimonial.quote}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 bg-black/10">
+          <div className="container mx-auto px-6">
+            <h2 className="text-4xl font-bold text-center mb-16 gradient-text">Our Process</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {process.map((step, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.2 }}
+                  className="glass-card p-8 relative"
+                >
+                  <div className="absolute -left-4 top-8 w-8 h-8 rounded-full bg-neon-blue flex items-center justify-center">
+                    {index + 1}
+                  </div>
+                  <step.icon className="w-10 h-10 mb-4 text-neon-blue" />
+                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                  <p className="text-gray-400">{step.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section ref={aboutRef} className="py-20 bg-black/10">
+          <div className="container mx-auto px-6">
+            <h2 className="text-4xl font-bold text-center mb-16 gradient-text">About TokenFlow</h2>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
               <motion.div
-                key={index}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.2 }}
-                className="glass-card p-8 relative"
+                className="space-y-6"
               >
-                <div className="absolute -left-4 top-8 w-8 h-8 rounded-full bg-neon-blue flex items-center justify-center">
-                  {index + 1}
-                </div>
-                <step.icon className="w-10 h-10 mb-4 text-neon-blue" />
-                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                <p className="text-gray-400">{step.description}</p>
+                <p className="text-lg text-gray-300">
+                  TokenFlow is a leading Web3 consulting firm dedicated to empowering blockchain projects with comprehensive growth strategies and market expertise.
+                </p>
+                <p className="text-lg text-gray-300">
+                  Our team of experienced professionals combines deep technical knowledge with strategic insights to help your project succeed in the dynamic Web3 landscape.
+                </p>
               </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section ref={aboutRef} className="py-20 bg-black/10">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 gradient-text">About TokenFlow</h2>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              className="space-y-6"
-            >
-              <p className="text-lg text-gray-300">
-                TokenFlow is a leading Web3 consulting firm dedicated to empowering blockchain projects with comprehensive growth strategies and market expertise.
-              </p>
-              <p className="text-lg text-gray-300">
-                Our team of experienced professionals combines deep technical knowledge with strategic insights to help your project succeed in the dynamic Web3 landscape.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              className="glass-card p-8"
-            >
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <Shield className="w-8 h-8 text-neon-blue shrink-0 mt-1" />
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Trusted Expertise</h3>
-                    <p className="text-gray-400">Years of experience in blockchain and Web3 technologies</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <Target className="w-8 h-8 text-neon-blue shrink-0 mt-1" />
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Results-Driven</h3>
-                    <p className="text-gray-400">Focused on delivering measurable outcomes for our clients</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      <section ref={contactFormRef} className="py-20">
-        <div className="container mx-auto px-6">
-          {showContactForm ? (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="glass-card p-8 max-w-2xl mx-auto"
-            >
-              <h3 className="text-2xl font-bold mb-6 gradient-text text-center">Get in Touch</h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
-                  <Input
-                    id="name"
-                    name="name"
-                    required
-                    placeholder="Your name"
-                    className="bg-white/5 border-white/10"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="your@email.com"
-                    className="bg-white/5 border-white/10"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    required
-                    placeholder="How can we help you?"
-                    className="bg-white/5 border-white/10 min-h-[120px]"
-                  />
-                </div>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                  <Button type="submit" className="w-full sm:w-auto">
-                    <Send className="w-4 h-4 mr-2" />
-                    Send Message
-                  </Button>
-                  <a
-                    href="tel:+1234567890"
-                    className="flex items-center justify-center space-x-2 px-4 py-2 rounded-md border border-neon-blue text-neon-blue hover:bg-neon-blue/10 transition-colors w-full sm:w-auto"
-                  >
-                    <Phone className="w-4 h-4" />
-                    <span>Call Us</span>
-                  </a>
-                </div>
-              </form>
-            </motion.div>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="glass-card p-12 max-w-3xl mx-auto text-center"
-            >
-              <h2 className="text-4xl font-bold mb-6 gradient-text">Let's Build Your Web3 Success Story</h2>
-              <p className="text-xl text-gray-300 mb-8">
-                Ready to take your blockchain project to the next level? Let's connect and discuss how we can help you achieve your goals.
-              </p>
-              <Button
-                onClick={() => setShowContactForm(true)}
-                className="bg-primary hover:bg-primary-light transition-colors px-8 py-6 rounded-full text-white font-semibold inline-flex items-center space-x-2 group"
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                className="glass-card p-8"
               >
-                <span>Contact Us</span>
-                <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
-          )}
-        </div>
-      </section>
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <Shield className="w-8 h-8 text-neon-blue shrink-0 mt-1" />
+                    <div>
+                      <h3 className="text-xl font-semibold mb-2">Trusted Expertise</h3>
+                      <p className="text-gray-400">Years of experience in blockchain and Web3 technologies</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-4">
+                    <Target className="w-8 h-8 text-neon-blue shrink-0 mt-1" />
+                    <div>
+                      <h3 className="text-xl font-semibold mb-2">Results-Driven</h3>
+                      <p className="text-gray-400">Focused on delivering measurable outcomes for our clients</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        <section ref={contactFormRef} className="py-20">
+          <div className="container mx-auto px-6">
+            {showContactForm ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="glass-card p-8 max-w-2xl mx-auto"
+              >
+                <h3 className="text-2xl font-bold mb-6 gradient-text text-center">Get in Touch</h3>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
+                    <Input
+                      id="name"
+                      name="name"
+                      required
+                      placeholder="Your name"
+                      className="bg-white/5 border-white/10"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="your@email.com"
+                      className="bg-white/5 border-white/10"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      required
+                      placeholder="How can we help you?"
+                      className="bg-white/5 border-white/10 min-h-[120px]"
+                    />
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <Button type="submit" className="w-full sm:w-auto">
+                      <Send className="w-4 h-4 mr-2" />
+                      Send Message
+                    </Button>
+                    <a
+                      href="tel:+1234567890"
+                      className="flex items-center justify-center space-x-2 px-4 py-2 rounded-md border border-neon-blue text-neon-blue hover:bg-neon-blue/10 transition-colors w-full sm:w-auto"
+                    >
+                      <Phone className="w-4 h-4" />
+                      <span>Call Us</span>
+                    </a>
+                  </div>
+                </form>
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="glass-card p-12 max-w-3xl mx-auto text-center"
+              >
+                <h2 className="text-4xl font-bold mb-6 gradient-text">Let's Build Your Web3 Success Story</h2>
+                <p className="text-xl text-gray-300 mb-8">
+                  Ready to take your blockchain project to the next level? Let's connect and discuss how we can help you achieve your goals.
+                </p>
+                <Button
+                  onClick={() => setShowContactForm(true)}
+                  className="bg-primary hover:bg-primary-light transition-colors px-8 py-6 rounded-full text-white font-semibold inline-flex items-center space-x-2 group"
+                >
+                  <span>Contact Us</span>
+                  <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </motion.div>
+            )}
+          </div>
+        </section>
+      </div>
     </div>
   );
 };
