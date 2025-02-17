@@ -243,7 +243,19 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <div ref={containerRef} className="absolute inset-0 -z-10" />
+      <div className="absolute inset-0 -z-20 overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute min-w-full min-h-full object-cover"
+          style={{ filter: 'brightness(0.4)' }}
+        >
+          <source src="https://assets.production.linktr.ee/profile--collab-theme-assets/backgroundVideoDesktop.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div className="absolute inset-0 -z-10 bg-black/40" />
       
       <nav className="fixed top-0 w-full z-50 glass-effect">
         <div className="container mx-auto px-6 py-4">
@@ -338,11 +350,18 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ scale: 1.02 }}
-                className="glass-card p-8 hover:border-neon-blue/50 transition-colors"
+                className="relative group"
               >
-                <h3 className="text-2xl font-semibold mb-4">{solution.title}</h3>
-                <p className="text-gray-400">{solution.description}</p>
-                <ChevronRight className="w-6 h-6 text-neon-blue mt-4" />
+                <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-xl opacity-0 group-hover:opacity-20 transition-all duration-300" />
+                <div className="glass-card p-8 relative overflow-hidden border-0">
+                  <div className="absolute inset-0 bg-white/5 backdrop-blur-xl" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                  <div className="relative z-10">
+                    <h3 className="text-2xl font-semibold mb-4 group-hover:text-neon-blue transition-colors">{solution.title}</h3>
+                    <p className="text-gray-400 mb-6">{solution.description}</p>
+                    <ChevronRight className="w-6 h-6 text-neon-blue transform group-hover:translate-x-2 transition-transform" />
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -359,11 +378,21 @@ const Index = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="glass-card p-6 text-center"
+                whileHover={{ scale: 1.02 }}
+                className="relative group"
               >
-                <feature.icon className="w-10 h-10 mx-auto mb-4 text-neon-blue" />
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-400">{feature.description}</p>
+                <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-xl opacity-0 group-hover:opacity-20 transition-all duration-300" />
+                <div className="glass-card p-8 text-center relative overflow-hidden border-0">
+                  <div className="absolute inset-0 bg-white/5 backdrop-blur-xl" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                  <div className="relative z-10">
+                    <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                      <feature.icon className="w-8 h-8 text-neon-blue transform group-hover:scale-110 transition-transform" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-4 group-hover:text-neon-blue transition-colors">{feature.title}</h3>
+                    <p className="text-gray-400">{feature.description}</p>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -380,18 +409,31 @@ const Index = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.1 }}
-                className="glass-card p-8 relative"
+                whileHover={{ scale: 1.02 }}
+                className="relative group"
               >
-                <Star className="absolute top-4 right-4 text-neon-blue w-6 h-6" />
-                <img
-                  src={testimonial.image}
-                  alt={testimonial.author}
-                  className="w-16 h-16 rounded-full mb-4"
-                />
-                <p className="text-lg mb-4 text-gray-300">{testimonial.quote}</p>
-                <div>
-                  <p className="font-semibold">{testimonial.author}</p>
-                  <p className="text-sm text-gray-400">{testimonial.role}</p>
+                <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-xl opacity-0 group-hover:opacity-20 transition-all duration-300" />
+                <div className="glass-card p-8 relative overflow-hidden border-0">
+                  <div className="absolute inset-0 bg-white/5 backdrop-blur-xl" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                  <div className="relative z-10">
+                    <Star className="absolute top-4 right-4 text-neon-blue w-6 h-6" />
+                    <div className="flex items-center mb-6">
+                      <div className="relative w-16 h-16 mr-4">
+                        <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <img
+                          src={testimonial.image}
+                          alt={testimonial.author}
+                          className="w-full h-full rounded-full object-cover relative z-10 p-0.5"
+                        />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-lg group-hover:text-neon-blue transition-colors">{testimonial.author}</p>
+                        <p className="text-gray-400">{testimonial.role}</p>
+                      </div>
+                    </div>
+                    <p className="text-lg text-gray-300 italic">{testimonial.quote}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}
