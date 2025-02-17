@@ -1,10 +1,18 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronRight, Star, Users, Rocket, ChartBar, MessageSquare, Target, LineChart, Shield, Send } from "lucide-react";
+import { ArrowRight, ChevronRight, Star, Users, Rocket, ChartBar, MessageSquare, Target, LineChart, Shield, Send, Phone } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
 
 const Index = () => {
+  const [showContactForm, setShowContactForm] = useState(false);
+  const { toast } = useToast();
   const containerRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLElement>(null);
+  const contactFormRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -16,7 +24,6 @@ const Index = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
 
-    // Create floating cubes
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const material = new THREE.MeshPhongMaterial({
       color: 0x7E69AB,
@@ -42,7 +49,6 @@ const Index = () => {
       cubes.push(cube);
     }
 
-    // Add lights
     const ambientLight = new THREE.AmbientLight(0x404040);
     scene.add(ambientLight);
 
@@ -52,7 +58,6 @@ const Index = () => {
 
     camera.position.z = 5;
 
-    // Animation
     const animate = () => {
       requestAnimationFrame(animate);
 
@@ -66,7 +71,6 @@ const Index = () => {
 
     animate();
 
-    // Handle resize
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
@@ -80,6 +84,28 @@ const Index = () => {
       containerRef.current?.removeChild(renderer.domElement);
     };
   }, []);
+
+  const scrollToRef = (ref: React.RefObject<HTMLElement>) => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    
+    console.log({
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    });
+
+    toast({
+      title: "Message sent!",
+      description: "We'll get back to you as soon as possible.",
+    });
+
+    setShowContactForm(false);
+  };
 
   const metrics = [
     { value: "150+", label: "Projects Launched" },
@@ -217,22 +243,36 @@ const Index = () => {
     <div className="min-h-screen relative overflow-hidden">
       <div ref={containerRef} className="absolute inset-0 -z-10" />
       
-      {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 glass-effect">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="text-xl font-bold gradient-text">TokenFlow</div>
             <div className="hidden md:flex items-center space-x-8">
               <a href="#solutions" className="hover:text-neon-blue transition-colors">Solutions</a>
-              <a href="#about" className="hover:text-neon-blue transition-colors">About</a>
+              <button 
+                onClick={() => scrollToRef(aboutRef)} 
+                className="hover:text-neon-blue transition-colors"
+              >
+                About
+              </button>
               <a href="#team" className="hover:text-neon-blue transition-colors">Team</a>
-              <a href="#contact" className="hover:text-neon-blue transition-colors">Contact</a>
+              <button 
+                onClick={() => {
+                  setShowContactForm(true);
+                  setTimeout(() => scrollToRef(contactFormRef), 100);
+                }} 
+                className="hover:text-neon-blue transition-colors"
+              >
+                Contact
+              </button>
             </div>
+            <button className="md:hidden text-white p-2">
+              <MessageSquare className="w-6 h-6" />
+            </button>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center hero-gradient">
         <div className="container mx-auto px-6 pt-32">
           <motion.div
@@ -255,7 +295,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Metrics Section */}
       <section className="py-20 bg-black/20">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -275,7 +314,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Solutions Section */}
       <section id="solutions" className="py-20">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-16 gradient-text">Core Solutions</h2>
@@ -298,7 +336,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Features Section */}
       <section className="py-20 bg-black/10">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-16 gradient-text">What Sets Us Apart</h2>
@@ -320,7 +357,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
       <section className="py-20">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-16 gradient-text">Client Success Stories</h2>
@@ -350,7 +386,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Process Section */}
       <section className="py-20 bg-black/10">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-16 gradient-text">Our Process</h2>
@@ -375,7 +410,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Team Section */}
       <section id="team" className="py-20">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-16 gradient-text">Meet Our Team</h2>
@@ -403,7 +437,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Values Section */}
       <section className="py-20 bg-black/10">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-16 gradient-text">Our Values</h2>
@@ -425,23 +458,123 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20">
-        <div className="container mx-auto px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="glass-card p-12 max-w-3xl mx-auto"
-          >
-            <h2 className="text-4xl font-bold mb-6 gradient-text">Let's Build Your Web3 Success Story</h2>
-            <p className="text-xl text-gray-300 mb-8">
-              Ready to take your blockchain project to the next level? Let's connect and discuss how we can help you achieve your goals.
-            </p>
-            <button className="bg-primary hover:bg-primary-light transition-colors px-8 py-4 rounded-full text-white font-semibold flex items-center mx-auto space-x-2 group">
-              <span>Contact Us</span>
-              <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </motion.div>
+      <section ref={aboutRef} className="py-20 bg-black/10">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center mb-16 gradient-text">About TokenFlow</h2>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="space-y-6"
+            >
+              <p className="text-lg text-gray-300">
+                TokenFlow is a leading Web3 consulting firm dedicated to empowering blockchain projects with comprehensive growth strategies and market expertise.
+              </p>
+              <p className="text-lg text-gray-300">
+                Our team of experienced professionals combines deep technical knowledge with strategic insights to help your project succeed in the dynamic Web3 landscape.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="glass-card p-8"
+            >
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4">
+                  <Shield className="w-8 h-8 text-neon-blue shrink-0 mt-1" />
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Trusted Expertise</h3>
+                    <p className="text-gray-400">Years of experience in blockchain and Web3 technologies</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <Target className="w-8 h-8 text-neon-blue shrink-0 mt-1" />
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Results-Driven</h3>
+                    <p className="text-gray-400">Focused on delivering measurable outcomes for our clients</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section ref={contactFormRef} className="py-20">
+        <div className="container mx-auto px-6">
+          {showContactForm ? (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="glass-card p-8 max-w-2xl mx-auto"
+            >
+              <h3 className="text-2xl font-bold mb-6 gradient-text text-center">Get in Touch</h3>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
+                  <Input
+                    id="name"
+                    name="name"
+                    required
+                    placeholder="Your name"
+                    className="bg-white/5 border-white/10"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="your@email.com"
+                    className="bg-white/5 border-white/10"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    required
+                    placeholder="How can we help you?"
+                    className="bg-white/5 border-white/10 min-h-[120px]"
+                  />
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <Button type="submit" className="w-full sm:w-auto">
+                    <Send className="w-4 h-4 mr-2" />
+                    Send Message
+                  </Button>
+                  <a
+                    href="tel:+1234567890"
+                    className="flex items-center justify-center space-x-2 px-4 py-2 rounded-md border border-neon-blue text-neon-blue hover:bg-neon-blue/10 transition-colors w-full sm:w-auto"
+                  >
+                    <Phone className="w-4 h-4" />
+                    <span>Call Us</span>
+                  </a>
+                </div>
+              </form>
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="glass-card p-12 max-w-3xl mx-auto text-center"
+            >
+              <h2 className="text-4xl font-bold mb-6 gradient-text">Let's Build Your Web3 Success Story</h2>
+              <p className="text-xl text-gray-300 mb-8">
+                Ready to take your blockchain project to the next level? Let's connect and discuss how we can help you achieve your goals.
+              </p>
+              <Button
+                onClick={() => setShowContactForm(true)}
+                className="bg-primary hover:bg-primary-light transition-colors px-8 py-6 rounded-full text-white font-semibold inline-flex items-center space-x-2 group"
+              >
+                <span>Contact Us</span>
+                <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </motion.div>
+          )}
         </div>
       </section>
     </div>
