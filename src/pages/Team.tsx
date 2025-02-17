@@ -1,11 +1,15 @@
-
 import { motion } from "framer-motion";
 import { Users, Rocket, Target, Linkedin, Github, Twitter, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Team = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const team = [
     {
