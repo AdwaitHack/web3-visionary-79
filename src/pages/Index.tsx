@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
+import { ParticlesBackground } from "@/components/ui/particles";
 
 const Index = () => {
   const [showContactForm, setShowContactForm] = useState(false);
@@ -243,6 +244,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative">
+      <ParticlesBackground />
       <section className="min-h-screen relative overflow-hidden">
         <div className="absolute inset-0 -z-20 overflow-hidden">
           <video
@@ -256,66 +258,100 @@ const Index = () => {
             <source src="https://assets.production.linktr.ee/profile--collab-theme-assets/backgroundVideoDesktop.mp4" type="video/mp4" />
           </video>
         </div>
-        <div className="absolute inset-0 -z-10 bg-black/40" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-black/60 to-background" />
         
         <nav className="fixed top-0 w-full z-50 glass-effect">
           <div className="container mx-auto px-6 py-4">
             <div className="flex items-center justify-between">
               <div className="text-xl font-bold gradient-text">TokenFlow</div>
               <div className="hidden md:flex items-center space-x-8">
-                <a href="#solutions" className="hover:text-neon-blue transition-colors">Solutions</a>
-                <button 
+                <motion.a 
+                  href="#solutions" 
+                  className="hover:text-neon-blue transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Solutions
+                </motion.a>
+                <motion.button 
                   onClick={() => scrollToRef(aboutRef)} 
                   className="hover:text-neon-blue transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   About
-                </button>
-                <button 
+                </motion.button>
+                <motion.button 
                   onClick={() => navigate('/team')} 
                   className="hover:text-neon-blue transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   Team
-                </button>
-                <button 
+                </motion.button>
+                <motion.button 
                   onClick={() => {
                     setShowContactForm(true);
                     setTimeout(() => scrollToRef(contactFormRef), 100);
-                  }} 
+                  }}
                   className="hover:text-neon-blue transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   Contact
-                </button>
+                </motion.button>
               </div>
-              <button className="md:hidden text-white p-2">
+              <motion.button 
+                className="md:hidden text-white p-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <MessageSquare className="w-6 h-6" />
-              </button>
+              </motion.button>
             </div>
           </div>
         </nav>
 
-        <div className="container mx-auto px-6 h-screen flex items-center justify-center">
+        <div className="container mx-auto px-6 h-screen flex items-center justify-center relative">
+          <div className="absolute inset-0 hero-gradient" />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center"
+            className="text-center relative z-10"
           >
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 gradient-text">
+            <motion.h1 
+              className="text-5xl md:text-7xl font-bold mb-6 gradient-text"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+            >
               Navigating Web3 Success
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            </motion.h1>
+            <motion.p 
+              className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+            >
               Empowering blockchain projects with data-driven growth strategies, community building, and comprehensive market penetration.
-            </p>
-            <button 
+            </motion.p>
+            <motion.button 
               onClick={() => {
                 setShowContactForm(true);
                 scrollToRef(contactFormRef);
               }}
-              className="bg-primary hover:bg-primary-light transition-colors px-8 py-4 rounded-full text-white font-semibold flex items-center mx-auto space-x-2 group"
+              className="bg-primary hover:bg-primary-light transition-colors px-8 py-4 rounded-full text-white font-semibold flex items-center mx-auto space-x-2 group relative overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <span>Get Started</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
+              <span className="relative z-10">Get Started</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform relative z-10" />
+              <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </motion.button>
           </motion.div>
         </div>
       </section>
