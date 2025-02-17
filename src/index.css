@@ -1,12 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --background: 261deg 25% 14%;
+    --foreground: 0deg 0% 100%;
+    
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
 
@@ -96,6 +98,36 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[#221F26] text-white font-sans antialiased;
   }
+
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl;
+  }
+
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/5;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink text-transparent bg-clip-text;
+  }
+}
+
+.hero-gradient {
+  background: radial-gradient(
+    circle at center,
+    rgba(126, 105, 171, 0.3) 0%,
+    rgba(34, 31, 38, 0) 70%
+  );
+}
+
+.floating-animation {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0% { transform: translate(0, 0px); }
+  50% { transform: translate(0, 15px); }
+  100% { transform: translate(0, -0px); }
 }
