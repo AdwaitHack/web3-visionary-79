@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { motion } from "framer-motion";
-import { ArrowRight, ChevronRight, Star, Users, Rocket, ChartBar, MessageSquare, Target, LineChart, Shield, Send, Phone } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, ChevronRight, Star, Users, Rocket, ChartBar, MessageSquare, Target, LineChart, Shield, Send, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,11 +11,16 @@ import { ParticlesBackground } from "@/components/ui/particles";
 
 const Index = () => {
   const [showContactForm, setShowContactForm] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
   const contactFormRef = useRef<HTMLDivElement>(null);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -302,14 +307,76 @@ const Index = () => {
                 </motion.button>
               </div>
               <motion.button 
-                className="md:hidden text-white p-2"
+                onClick={toggleMobileMenu}
+                className="md:hidden text-white p-2 z-50"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <MessageSquare className="w-6 h-6" />
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <MessageSquare className="w-6 h-6" />
+                )}
               </motion.button>
             </div>
           </div>
+
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="fixed inset-0 bg-background/95 backdrop-blur-lg md:hidden z-40"
+              >
+                <div className="flex flex-col items-center justify-center h-full space-y-8 text-xl">
+                  <motion.a
+                    href="#solutions"
+                    onClick={toggleMobileMenu}
+                    className="hover:text-neon-blue transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Solutions
+                  </motion.a>
+                  <motion.button
+                    onClick={() => {
+                      scrollToRef(aboutRef);
+                      toggleMobileMenu();
+                    }}
+                    className="hover:text-neon-blue transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    About
+                  </motion.button>
+                  <motion.button
+                    onClick={() => {
+                      navigate('/team');
+                      toggleMobileMenu();
+                    }}
+                    className="hover:text-neon-blue transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Team
+                  </motion.button>
+                  <motion.button
+                    onClick={() => {
+                      setShowContactForm(true);
+                      setTimeout(() => scrollToRef(contactFormRef), 100);
+                      toggleMobileMenu();
+                    }}
+                    className="hover:text-neon-blue transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Contact
+                  </motion.button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </nav>
 
         <div className="container mx-auto px-6 h-screen flex items-center justify-center relative">
@@ -389,14 +456,21 @@ const Index = () => {
                   whileHover={{ scale: 1.02 }}
                   className="relative group"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/20 via-neon-purple/20 to-neon-pink/20 rounded-xl opacity-50 group-hover:opacity-20 transition-all duration-300" />
-                  <div className="glass-card p-8 relative overflow-hidden border-0 shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-xl bg-white/10">
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.08] to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/30 to-neon-pink/30 rounded-xl blur-[2px]" />
+                  <div className="glass-card p-8 relative overflow-hidden border border-white/10 rounded-xl backdrop-blur-xl bg-black/30">
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.1] to-transparent opacity-50" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/20 to-neon-pink/20 opacity-0 group-hover:opacity-100 transition-all duration-500" />
                     <div className="relative z-10">
-                      <h3 className="text-2xl font-semibold mb-4 group-hover:text-neon-blue transition-colors">{solution.title}</h3>
-                      <p className="text-gray-400 mb-6">{solution.description}</p>
-                      <ChevronRight className="w-6 h-6 text-neon-blue transform group-hover:translate-x-2 transition-transform" />
+                      <div className="flex items-start space-x-4 mb-6">
+                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-neon-blue/20 to-neon-pink/20 flex items-center justify-center">
+                          <ChevronRight className="w-6 h-6 text-neon-blue" />
+                        </div>
+                        <div>
+                          <h3 className="text-2xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">{solution.title}</h3>
+                          <p className="text-gray-400">{solution.description}</p>
+                        </div>
+                      </div>
+                      <div className="h-px w-full bg-gradient-to-r from-neon-blue/20 via-neon-pink/20 to-transparent" />
                     </div>
                   </div>
                 </motion.div>
@@ -418,15 +492,17 @@ const Index = () => {
                   whileHover={{ scale: 1.02 }}
                   className="relative group"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/20 via-neon-purple/20 to-neon-pink/20 rounded-xl opacity-50 group-hover:opacity-20 transition-all duration-300" />
-                  <div className="glass-card p-8 text-center relative overflow-hidden border-0 shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-xl bg-white/10">
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.08] to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/30 to-neon-pink/30 rounded-xl blur-[2px]" />
+                  <div className="glass-card p-8 text-center relative overflow-hidden border border-white/10 rounded-xl backdrop-blur-xl bg-black/30">
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.1] to-transparent opacity-50" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/20 to-neon-pink/20 opacity-0 group-hover:opacity-100 transition-all duration-500" />
                     <div className="relative z-10">
-                      <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors shadow-lg">
-                        <feature.icon className="w-8 h-8 text-neon-blue transform group-hover:scale-110 transition-transform" />
+                      <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-neon-blue/20 to-neon-pink/20 p-[1px]">
+                        <div className="w-full h-full rounded-2xl bg-black/50 flex items-center justify-center backdrop-blur-xl">
+                          <feature.icon className="w-10 h-10 text-neon-blue transform group-hover:scale-110 transition-transform" />
+                        </div>
                       </div>
-                      <h3 className="text-xl font-semibold mb-4 group-hover:text-neon-blue transition-colors">{feature.title}</h3>
+                      <h3 className="text-xl font-semibold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">{feature.title}</h3>
                       <p className="text-gray-400">{feature.description}</p>
                     </div>
                   </div>
