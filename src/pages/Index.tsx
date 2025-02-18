@@ -265,59 +265,61 @@ const Index = () => {
         </div>
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-black/60 to-background" />
         
-        <nav className="fixed top-0 w-full z-50 glass-effect">
-          <div className="container mx-auto px-6 py-4">
-            <div className="flex items-center justify-between">
-              <div className="text-xl font-bold gradient-text">TokenFlow</div>
-              <div className="hidden md:flex items-center space-x-8">
-                <motion.a 
-                  href="#solutions" 
-                  className="hover:text-neon-blue transition-colors"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Solutions
-                </motion.a>
+        <nav className="fixed top-0 w-full z-50">
+          <div className="glass-effect backdrop-blur-md bg-black/20">
+            <div className="container mx-auto px-6">
+              <div className="flex items-center justify-between h-16">
+                <div className="text-xl font-bold gradient-text">TokenFlow Consulting</div>
+                <div className="hidden md:flex items-center space-x-8">
+                  <motion.a 
+                    href="#solutions" 
+                    className="hover:text-neon-blue transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Solutions
+                  </motion.a>
+                  <motion.button 
+                    onClick={() => scrollToRef(aboutRef)} 
+                    className="hover:text-neon-blue transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    About
+                  </motion.button>
+                  <motion.button 
+                    onClick={() => navigate('/team')} 
+                    className="hover:text-neon-blue transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Team
+                  </motion.button>
+                  <motion.button 
+                    onClick={() => {
+                      setShowContactForm(true);
+                      setTimeout(() => scrollToRef(contactFormRef), 100);
+                    }}
+                    className="hover:text-neon-blue transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Contact
+                  </motion.button>
+                </div>
                 <motion.button 
-                  onClick={() => scrollToRef(aboutRef)} 
-                  className="hover:text-neon-blue transition-colors"
+                  onClick={toggleMobileMenu}
+                  className="md:hidden text-white p-2"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  About
-                </motion.button>
-                <motion.button 
-                  onClick={() => navigate('/team')} 
-                  className="hover:text-neon-blue transition-colors"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Team
-                </motion.button>
-                <motion.button 
-                  onClick={() => {
-                    setShowContactForm(true);
-                    setTimeout(() => scrollToRef(contactFormRef), 100);
-                  }}
-                  className="hover:text-neon-blue transition-colors"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Contact
+                  {isMobileMenuOpen ? (
+                    <X className="w-6 h-6" />
+                  ) : (
+                    <MessageSquare className="w-6 h-6" />
+                  )}
                 </motion.button>
               </div>
-              <motion.button 
-                onClick={toggleMobileMenu}
-                className="md:hidden text-white p-2 z-50"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {isMobileMenuOpen ? (
-                  <X className="w-6 h-6" />
-                ) : (
-                  <MessageSquare className="w-6 h-6" />
-                )}
-              </motion.button>
             </div>
           </div>
 
@@ -327,7 +329,8 @@ const Index = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="fixed inset-0 bg-background/95 backdrop-blur-lg md:hidden z-40"
+                className="fixed inset-0 bg-black/95 backdrop-blur-xl md:hidden"
+                style={{ zIndex: 40 }}
               >
                 <div className="flex flex-col items-center justify-center h-full space-y-8 text-xl">
                   <motion.a
@@ -379,7 +382,7 @@ const Index = () => {
           </AnimatePresence>
         </nav>
 
-        <div className="container mx-auto px-6 h-screen flex items-center justify-center relative">
+        <div className="container mx-auto px-6 h-screen flex items-center justify-center relative pt-16">
           <div className="absolute inset-0 hero-gradient" />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -525,15 +528,15 @@ const Index = () => {
                   whileHover={{ scale: 1.02 }}
                   className="relative group"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-xl opacity-0 group-hover:opacity-20 transition-all duration-300" />
-                  <div className="glass-card p-8 relative overflow-hidden border-0">
-                    <div className="absolute inset-0 bg-white/5 backdrop-blur-xl" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/30 to-neon-pink/30 rounded-xl blur-[2px]" />
+                  <div className="glass-card p-8 relative overflow-hidden border border-white/10 rounded-xl backdrop-blur-xl bg-black/30">
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.1] to-transparent opacity-50" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/20 to-neon-pink/20 opacity-0 group-hover:opacity-100 transition-all duration-500" />
                     <div className="relative z-10">
                       <Star className="absolute top-4 right-4 text-neon-blue w-6 h-6" />
                       <div className="flex items-center mb-6">
                         <div className="relative w-16 h-16 mr-4">
-                          <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                          <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/20 to-neon-pink/20 rounded-full" />
                           <img
                             src={testimonial.image}
                             alt={testimonial.author}
@@ -566,12 +569,21 @@ const Index = () => {
                   transition={{ delay: index * 0.2 }}
                   className="glass-card p-8 relative"
                 >
-                  <div className="absolute -left-4 top-8 w-8 h-8 rounded-full bg-neon-blue flex items-center justify-center">
-                    {index + 1}
+                  <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/30 to-neon-pink/30 rounded-xl blur-[2px]" />
+                  <div className="glass-card p-8 relative overflow-hidden border border-white/10 rounded-xl backdrop-blur-xl bg-black/30">
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.1] to-transparent opacity-50" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/20 to-neon-pink/20 opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                    <div className="relative z-10">
+                      <div className="absolute -left-4 top-8 w-8 h-8 rounded-full bg-gradient-to-r from-neon-blue to-neon-pink flex items-center justify-center font-bold">
+                        {index + 1}
+                      </div>
+                      <div className="pl-6">
+                        <step.icon className="w-10 h-10 mb-4 text-neon-blue" />
+                        <h3 className="text-xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">{step.title}</h3>
+                        <p className="text-gray-400">{step.description}</p>
+                      </div>
+                    </div>
                   </div>
-                  <step.icon className="w-10 h-10 mb-4 text-neon-blue" />
-                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                  <p className="text-gray-400">{step.description}</p>
                 </motion.div>
               ))}
             </div>
