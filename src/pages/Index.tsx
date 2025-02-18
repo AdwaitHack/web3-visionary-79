@@ -258,31 +258,49 @@ const Index = () => {
             loop
             playsInline
             className="absolute min-w-full min-h-full object-cover"
-            style={{ filter: 'brightness(0.4)' }}
+            style={{ 
+              filter: 'brightness(0.7) contrast(1.2)',
+              mixBlendMode: 'overlay'
+            }}
           >
             <source src="https://assets.production.linktr.ee/profile--collab-theme-assets/backgroundVideoDesktop.mp4" type="video/mp4" />
           </video>
         </div>
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-black/60 to-background" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/20 via-black/40 to-background" />
         
         <nav className="fixed top-0 left-0 right-0 z-50">
-          <div className="bg-black/40 backdrop-blur-md border-b border-white/10">
+          <div className="bg-gradient-to-r from-neon-purple/10 via-primary/10 to-neon-blue/10 backdrop-blur-md border-b border-white/10">
             <div className="container mx-auto px-6">
               <div className="flex items-center justify-between h-16">
-                <a href="/" className="text-xl font-bold text-white hover:text-neon-blue transition-colors">
+                <a href="/" className="text-xl font-bold gradient-text hover:opacity-80 transition-opacity">
                   TokenFlow Consulting
                 </a>
                 
                 <div className="hidden md:flex items-center space-x-10">
-                  <a href="#solutions" className="text-sm text-gray-300 hover:text-white transition-colors">Solutions</a>
-                  <button onClick={() => scrollToRef(aboutRef)} className="text-sm text-gray-300 hover:text-white transition-colors">About</button>
-                  <button onClick={() => navigate('/team')} className="text-sm text-gray-300 hover:text-white transition-colors">Team</button>
+                  <a 
+                    href="#solutions" 
+                    className="text-sm text-gray-200 hover:text-neon-blue transition-colors"
+                  >
+                    Solutions
+                  </a>
+                  <button 
+                    onClick={() => scrollToRef(aboutRef)} 
+                    className="text-sm text-gray-200 hover:text-neon-blue transition-colors"
+                  >
+                    About
+                  </button>
+                  <button 
+                    onClick={() => navigate('/team')} 
+                    className="text-sm text-gray-200 hover:text-neon-blue transition-colors"
+                  >
+                    Team
+                  </button>
                   <button 
                     onClick={() => {
                       setShowContactForm(true);
                       setTimeout(() => scrollToRef(contactFormRef), 100);
                     }}
-                    className="px-4 py-2 text-sm font-medium text-white bg-neon-blue/20 hover:bg-neon-blue/30 rounded-full transition-colors border border-neon-blue/50"
+                    className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-neon-blue/20 to-neon-purple/20 hover:from-neon-blue/30 hover:to-neon-purple/30 rounded-full transition-all duration-300 border border-neon-blue/50 hover:border-neon-purple/50"
                   >
                     Contact Us
                   </button>
@@ -290,7 +308,7 @@ const Index = () => {
 
                 <button 
                   onClick={toggleMobileMenu}
-                  className="md:hidden p-2 text-gray-300 hover:text-white transition-colors"
+                  className="md:hidden p-2 text-gray-200 hover:text-neon-blue transition-colors"
                 >
                   {isMobileMenuOpen ? (
                     <X className="w-5 h-5" />
@@ -309,13 +327,13 @@ const Index = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="absolute top-16 left-0 right-0 bg-black/95 backdrop-blur-lg md:hidden border-b border-white/10"
+                className="absolute top-16 left-0 right-0 bg-gradient-to-b from-black/95 to-primary/20 backdrop-blur-lg md:hidden border-b border-white/10"
               >
                 <div className="container mx-auto px-6 py-6 flex flex-col space-y-4">
                   <a 
                     href="#solutions" 
                     onClick={toggleMobileMenu}
-                    className="text-gray-300 hover:text-white transition-colors py-2"
+                    className="text-gray-200 hover:text-neon-blue transition-colors py-2"
                   >
                     Solutions
                   </a>
@@ -324,7 +342,7 @@ const Index = () => {
                       scrollToRef(aboutRef);
                       toggleMobileMenu();
                     }}
-                    className="text-left text-gray-300 hover:text-white transition-colors py-2"
+                    className="text-left text-gray-200 hover:text-neon-blue transition-colors py-2"
                   >
                     About
                   </button>
@@ -333,7 +351,7 @@ const Index = () => {
                       navigate('/team');
                       toggleMobileMenu();
                     }}
-                    className="text-left text-gray-300 hover:text-white transition-colors py-2"
+                    className="text-left text-gray-200 hover:text-neon-blue transition-colors py-2"
                   >
                     Team
                   </button>
@@ -343,7 +361,7 @@ const Index = () => {
                       setTimeout(() => scrollToRef(contactFormRef), 100);
                       toggleMobileMenu();
                     }}
-                    className="w-full text-center px-4 py-2 text-sm font-medium text-white bg-neon-blue/20 hover:bg-neon-blue/30 rounded-full transition-colors border border-neon-blue/50"
+                    className="w-full text-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-neon-blue/20 to-neon-purple/20 hover:from-neon-blue/30 hover:to-neon-purple/30 rounded-full transition-all duration-300 border border-neon-blue/50 hover:border-neon-purple/50"
                   >
                     Contact Us
                   </button>
