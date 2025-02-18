@@ -265,60 +265,39 @@ const Index = () => {
         </div>
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-black/60 to-background" />
         
-        <nav className="fixed top-0 w-full z-50">
-          <div className="glass-effect backdrop-blur-md bg-black/20">
+        <nav className="fixed top-0 left-0 right-0 z-50">
+          <div className="bg-black/40 backdrop-blur-md border-b border-white/10">
             <div className="container mx-auto px-6">
               <div className="flex items-center justify-between h-16">
-                <div className="text-xl font-bold gradient-text">TokenFlow Consulting</div>
-                <div className="hidden md:flex items-center space-x-8">
-                  <motion.a 
-                    href="#solutions" 
-                    className="hover:text-neon-blue transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Solutions
-                  </motion.a>
-                  <motion.button 
-                    onClick={() => scrollToRef(aboutRef)} 
-                    className="hover:text-neon-blue transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    About
-                  </motion.button>
-                  <motion.button 
-                    onClick={() => navigate('/team')} 
-                    className="hover:text-neon-blue transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Team
-                  </motion.button>
-                  <motion.button 
+                <a href="/" className="text-xl font-bold text-white hover:text-neon-blue transition-colors">
+                  TokenFlow Consulting
+                </a>
+                
+                <div className="hidden md:flex items-center space-x-10">
+                  <a href="#solutions" className="text-sm text-gray-300 hover:text-white transition-colors">Solutions</a>
+                  <button onClick={() => scrollToRef(aboutRef)} className="text-sm text-gray-300 hover:text-white transition-colors">About</button>
+                  <button onClick={() => navigate('/team')} className="text-sm text-gray-300 hover:text-white transition-colors">Team</button>
+                  <button 
                     onClick={() => {
                       setShowContactForm(true);
                       setTimeout(() => scrollToRef(contactFormRef), 100);
                     }}
-                    className="hover:text-neon-blue transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    className="px-4 py-2 text-sm font-medium text-white bg-neon-blue/20 hover:bg-neon-blue/30 rounded-full transition-colors border border-neon-blue/50"
                   >
-                    Contact
-                  </motion.button>
+                    Contact Us
+                  </button>
                 </div>
-                <motion.button 
+
+                <button 
                   onClick={toggleMobileMenu}
-                  className="md:hidden text-white p-2"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="md:hidden p-2 text-gray-300 hover:text-white transition-colors"
                 >
                   {isMobileMenuOpen ? (
-                    <X className="w-6 h-6" />
+                    <X className="w-5 h-5" />
                   ) : (
-                    <MessageSquare className="w-6 h-6" />
+                    <MessageSquare className="w-5 h-5" />
                   )}
-                </motion.button>
+                </button>
               </div>
             </div>
           </div>
@@ -326,56 +305,48 @@ const Index = () => {
           <AnimatePresence>
             {isMobileMenuOpen && (
               <motion.div
-                initial={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                className="fixed inset-0 bg-black/95 backdrop-blur-xl md:hidden"
-                style={{ zIndex: 40 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="absolute top-16 left-0 right-0 bg-black/95 backdrop-blur-lg md:hidden border-b border-white/10"
               >
-                <div className="flex flex-col items-center justify-center h-full space-y-8 text-xl">
-                  <motion.a
-                    href="#solutions"
+                <div className="container mx-auto px-6 py-6 flex flex-col space-y-4">
+                  <a 
+                    href="#solutions" 
                     onClick={toggleMobileMenu}
-                    className="hover:text-neon-blue transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    className="text-gray-300 hover:text-white transition-colors py-2"
                   >
                     Solutions
-                  </motion.a>
-                  <motion.button
+                  </a>
+                  <button 
                     onClick={() => {
                       scrollToRef(aboutRef);
                       toggleMobileMenu();
                     }}
-                    className="hover:text-neon-blue transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    className="text-left text-gray-300 hover:text-white transition-colors py-2"
                   >
                     About
-                  </motion.button>
-                  <motion.button
+                  </button>
+                  <button 
                     onClick={() => {
                       navigate('/team');
                       toggleMobileMenu();
                     }}
-                    className="hover:text-neon-blue transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    className="text-left text-gray-300 hover:text-white transition-colors py-2"
                   >
                     Team
-                  </motion.button>
-                  <motion.button
+                  </button>
+                  <button 
                     onClick={() => {
                       setShowContactForm(true);
                       setTimeout(() => scrollToRef(contactFormRef), 100);
                       toggleMobileMenu();
                     }}
-                    className="hover:text-neon-blue transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    className="w-full text-center px-4 py-2 text-sm font-medium text-white bg-neon-blue/20 hover:bg-neon-blue/30 rounded-full transition-colors border border-neon-blue/50"
                   >
-                    Contact
-                  </motion.button>
+                    Contact Us
+                  </button>
                 </div>
               </motion.div>
             )}
